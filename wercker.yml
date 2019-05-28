@@ -1,0 +1,53 @@
+box: maven:latest
+command-timeout: 30
+no-response-timeout: 15
+
+workflows:
+  - name: build-and-push
+    pipelines:
+      - name: build
+      - name: push-to-oci-registry
+        requires:
+          - build
+
+build:
+  base-path: /go/src/github.com/wercker/wercker
+  steps:
+    - xenoterracide/maven:
+        goals: clean package spring-boot:repackage
+    - script: 
+        name: copy package to output
+        code: |
+              echo $WERCKER_OUTPUT_DIR
+              echo $WERCKER_SOURCE_DIR
+              pwd
+              ls -lrt
+              cp ./target/*.jar $WERCKER_OUTPUT_DIR/event-management.jar
+              
+push-to-oci-registry:
+  box:
+    id: openjdk
+    tag: 8-jre-alpine
+  steps:
+    - script:
+        name: Move the jar to current dir
+        code: |
+            echo $WERCKER_SOURCE_DIR
+            ls -lrt
+            pwd
+            mv $WERCKER_SOURCE_DIR/event-management.jar /event-management.jar
+            touch /event-management.jar
+    - internal/docker-push: 
+        username: $OCIR_USERNAME
+        password: $OCIR_PASSWORD    
+        repository: $OCIR_REPOSITORY 
+        tag: latest
+        registry: https://$OCIR_REGISTRY/
+        volumes: /tmp
+        cmd: java -jar /event-management.jar
+        ports: 8085
+        
+    
+    
+               
+              

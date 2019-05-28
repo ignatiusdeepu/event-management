@@ -1,0 +1,29 @@
+server:
+  port: 8086
+  servlet:
+        contextPath: /event-management
+        
+spring:
+  jackson:
+    date-format: MM/dd/yyyy
+        
+event-group:
+  eventGroupList:
+    -
+      id: 1
+      name: Paralympic Games
+      description: Paralympics games are an upcoming major international multi-sport event
+      startDate: 06/12/2020
+      client: Euro Sports
+    -
+      id: 2
+      name: Paralympic Torch Run
+      description: The Paralympic Torch Relay is an event that welcomes everyone
+      startDate: 06/08/2020
+      client: Olympic Channel Services
+    -
+      id: 3
+      name: Olympic Games
+      description: Tokyo 2020, is an upcoming international multi-sport event
+      startDate: 05/20/2020
+      client: ESPN Sports
