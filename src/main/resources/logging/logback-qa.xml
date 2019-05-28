@@ -76,6 +76,8 @@
 
 	<root level="info">
 		<appender-ref ref="COMMON_ROLLER" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="HTTP_ROLLER" />
 	</root>
 
 </configuration>
