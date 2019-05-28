@@ -18,10 +18,6 @@ build:
     - script: 
         name: copy package to output
         code: |
-              echo $WERCKER_OUTPUT_DIR
-              echo $WERCKER_SOURCE_DIR
-              pwd
-              ls -lrt
               cp ./target/*.jar $WERCKER_OUTPUT_DIR/event-management.jar
               
 push-to-oci-registry:
@@ -32,9 +28,6 @@ push-to-oci-registry:
     - script:
         name: Move the jar to current dir
         code: |
-            echo $WERCKER_SOURCE_DIR
-            ls -lrt
-            pwd
             mv $WERCKER_SOURCE_DIR/event-management.jar /event-management.jar
             touch /event-management.jar
     - internal/docker-push: 
@@ -45,7 +38,7 @@ push-to-oci-registry:
         registry: https://$OCIR_REGISTRY/
         volumes: /tmp
         cmd: java -jar /event-management.jar
-        ports: 8085
+        ports: 8086
         
     
     
