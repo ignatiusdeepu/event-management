@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.netinsight.scheduall.event.management.dao.EventGroupRepository;
+import com.netinsight.scheduall.event.management.domain.request.EventGroupRequest;
 import com.netinsight.scheduall.event.management.domain.response.EventGroup;
 import com.netinsight.scheduall.event.management.service.EventGroupService;
 
@@ -20,6 +21,7 @@ public class EventGroupServiceImpl implements EventGroupService{
 	@Autowired
 	EventGroupRepository eventGroupRepository;
 	
+	@Override
 	public List<EventGroup> listAll() {
 		logger.info("Begin EventGroupServiceImpl::listAll");
 		List<EventGroup> eventGroupList = eventGroupRepository.findAll();
@@ -28,5 +30,13 @@ public class EventGroupServiceImpl implements EventGroupService{
         }).collect(Collectors.toList());
 		logger.info("Begin EventGroupServiceImpl::listAll");
 		return sortedList;
+	}
+	
+	@Override
+	public EventGroup add(EventGroupRequest eventGroupRequest) {
+		logger.info("Begin EventGroupServiceImpl::add");
+		EventGroup eventGroup = eventGroupRepository.add(eventGroupRequest);
+		logger.info("Begin EventGroupServiceImpl::add");
+		return eventGroup;
 	}
 }

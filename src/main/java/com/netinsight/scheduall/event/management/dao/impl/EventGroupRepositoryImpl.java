@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.netinsight.scheduall.event.management.config.EventGroupConfig;
 import com.netinsight.scheduall.event.management.dao.EventGroupRepository;
+import com.netinsight.scheduall.event.management.domain.request.EventGroupRequest;
 import com.netinsight.scheduall.event.management.domain.response.EventGroup;
 
 @Repository("helloWorldRepository")
@@ -19,8 +20,23 @@ public class EventGroupRepositoryImpl implements EventGroupRepository {
 	@Autowired
 	EventGroupConfig eventGroupConfig;
 	
+	@Override
 	public List<EventGroup> findAll() {
 		logger.info("Inside EventGroupRepositoryImpl::findAll");
 		return eventGroupConfig.getEventGroupList();
+	}
+	
+	@Override
+	public EventGroup add(EventGroupRequest eventGroupRequest) {
+		logger.info("Begin EventGroupRepositoryImpl::add");
+		EventGroup eventGroup = new EventGroup();
+		eventGroup.setName(eventGroupRequest.getName());
+		eventGroup.setDescription(eventGroupRequest.getDescription());
+		eventGroup.setClient(eventGroupRequest.getClient());
+		eventGroup.setStartDate(eventGroupRequest.getStartDate());
+		eventGroup.setId(eventGroupConfig.getEventGroupList().size()+1l);
+		logger.info("Begin EventGroupRepositoryImpl::add");
+		eventGroupConfig.getEventGroupList().add(eventGroup);
+		return eventGroup;
 	}
 }
