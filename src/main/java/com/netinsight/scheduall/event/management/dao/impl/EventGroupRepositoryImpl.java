@@ -12,7 +12,7 @@ import com.netinsight.scheduall.event.management.dao.EventGroupRepository;
 import com.netinsight.scheduall.event.management.domain.request.EventGroupRequest;
 import com.netinsight.scheduall.event.management.domain.response.EventGroup;
 
-@Repository("helloWorldRepository")
+@Repository("eventGroupRepository")
 public class EventGroupRepositoryImpl implements EventGroupRepository {
 
 	private static final Logger logger = LoggerFactory.getLogger(EventGroupRepositoryImpl.class);
