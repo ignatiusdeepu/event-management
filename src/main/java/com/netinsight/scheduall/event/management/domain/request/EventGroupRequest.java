@@ -25,6 +25,10 @@ public class EventGroupRequest {
 	@JsonProperty("startDate")
 	private Date startDate;
 	
+	@ApiModelProperty(notes = "Group EndDate")
+	@JsonProperty("endDate")
+	private Date endDate;
+	
 	@ApiModelProperty(notes = "Group Client")
 	@JsonProperty("client")
 	private String client;
@@ -61,6 +65,14 @@ public class EventGroupRequest {
 		this.client = client;
 	}
 	
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 	@Override
 	public String toString()
 	{

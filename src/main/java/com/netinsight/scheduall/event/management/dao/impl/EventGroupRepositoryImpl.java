@@ -35,6 +35,7 @@ public class EventGroupRepositoryImpl implements EventGroupRepository {
 		eventGroup.setClient(eventGroupRequest.getClient());
 		eventGroup.setStartDate(eventGroupRequest.getStartDate());
 		eventGroup.setId(eventGroupConfig.getEventGroupList().size()+1l);
+		eventGroup.setEndDate(eventGroupRequest.getEndDate());
 		logger.info("Begin EventGroupRepositoryImpl::add");
 		eventGroupConfig.getEventGroupList().add(eventGroup);
 		return eventGroup;
